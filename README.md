@@ -1,46 +1,76 @@
-# Getting Started with Create React App
+============================================================================================
+Заметки
+============================================================================================
+Этап I создание и описание проекта
+============================================================================================
+//npx create-react-app my-app --template typescript
+npm uninstall -g create-react-app
+#вставим название
+npx create-react-app todo --template typescript
+cd todo
+npm start
+#C:\Users\velmo\Desktop\Courses\todo-layout
+============================================================================================
+описание файлов
+============================================================================================
+import './App.css'
+форматы js и jsx взаимозаменяемые, а tsx используем для того, чтобы использовать логинку typescript внутри своих файлов. Также это главная точка входа приложения React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<App /> - это компонент, который по сути своей функция возвращающая вместо себя кусок вёрстки
 
-## Available Scripts
+root получает элемент по идентификатору root, является по типу своему HTML элементом.
+От метода root мы используем метод render, использующий вёрстку компонента <App />, возвращающего кусок вёрстки функцией. 
 
-In the project directory, you can run:
+метод reportWebVitals позволяет анализировать наши страницы
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+public/index.html - входная вёрстка, которая будет собирать в себе reactjs приложение
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+в нём есть блок с идентификатором <div id="root"> </div> в этот блок и будет помещаться вся вёрстка, которую мы разработаем на react 
 
-### `npm test`
+именно этот блок мы получаем в файле index.tsx через метод dpcoment.getElementyId('root') as HTMLElement 
+и внутри него методом рендера размещаем всю нашу вёрстку.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Вся наша вёрстка будет храниться в компоненте App, который импортируется из некого компонента файла .\App
+имеется ввиду App.tsx, который расположен рядом (в папке src) 
 
-### `npm run build`
+App.tsx содержит функцию App, которая возвращает вёрстку. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Каждый компонент приложения React - это функция, которая вместо себя возвращает вёрстку.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Подобный синтаксис равносилен вызову функции. Мы можем представить, что вместо тега <App /> 
+мы здесь видим вызов App функции, которая сюда вернёт определённую вёрстку. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+В этой вёрстке мы и видим те самые данные, которые мы видим в открытом приложении React, которая генерируется при запуске. 
 
-### `npm run eject`
+Конкретно "Edit src/App.tsx and save to reload"
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Reload позволяет собирать приложения и изменять его на ходу, что удобнее чем использование стандартного live сервера при разработке вёрстки.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+============================================================================================
+подключение стилей
+В src у нас есть App.css с обновленными стилями.
+Данный файл просто импортирован в компонент App()
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+все стили, которые применены к компоненту ./App.css будут применены ко всей вёрстки компонента App function App() и ко всем компонентам внутри компонента App.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Картинка импортирована из картинки в src, а это изображение вставлено в артибут src. Таким образом происходит вывод картинок на странице.
 
-## Learn More
+============================================================================================ 
+Этап II 
+Чистка проекта
+============================================================================================
+Почистим приложение от App, создадим в папке pages ToDoList
+Установим scss 
+npm install sass -save-dev
+сократим ссылку 
+npm i sass -save-dev
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+package.json устанавливаем devDependencies потому, что в финальном продукте (production) нам не нужны компоненты разработки, они нужны только во время разработки приложения
+  "devDependencies": {
+    "sass": "^1.62.1"
+  },
+  
+Теперь наше приложение умеет работать с компонентом стилей scss 
+Если есть ошибки можно посмотреть в файле проекта, но нужно удалять node_modules и файл package-lock.json
